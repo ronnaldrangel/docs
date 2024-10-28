@@ -17,8 +17,8 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Soporte",
+      "url": "mailto:soporte@wazend.net"
     }
   ],
   "topbarCtaButton": {
@@ -84,8 +84,8 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "facebook": "https://github.com/mintlify",
+    "instagram": "https://www.instagram.com/wazend.es/",
+    "tiktok": "https://www.tiktok.com/@wazend"
   }
 }
