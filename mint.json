@@ -15,6 +15,12 @@
       "to": "#07C983"
     }
   },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
   "navigation": [
     {
       "group": "Get Started",
