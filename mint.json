@@ -15,10 +15,6 @@
       "to": "#07C983"
     }
   },
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://wazend.net/"
-  },
   "tabs": [
     {
       "name": "API Reference",
