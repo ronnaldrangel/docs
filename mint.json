@@ -21,8 +21,7 @@
       "group": "WhatsApp API",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "send-message"
       ]
     }
   ],
