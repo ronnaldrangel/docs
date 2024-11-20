@@ -26,7 +26,8 @@
     {
       "group": "Enviar Mensaje",
       "pages": [
-        "send-text"
+        "send-text",
+        "send-media"
       ]
     }
   ],
