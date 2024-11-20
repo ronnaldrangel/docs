@@ -1,0 +1,4390 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Evolution API",
+    "version": "2.1.1"
+  },
+  "servers": [
+    {
+      "url": "https://{server-url}",
+      "variables": {
+        "server-url": {
+          "default": "evolution-example",
+          "description": "The URL of your EvolutionAPI server"
+        }
+      },
+      "description": "Your instance domain"
+    }
+  ],
+  "paths": {
+    "/instance/create": {
+      "post": {
+        "operationId": "createInstance",
+        "summary": "Create Instance",
+        "tags": ["Instance Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "instanceName": "{{instance}}",
+                  "qrcode": true,
+                  "integration": "WHATSAPP-BAILEYS"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/fetchInstances": {
+      "get": {
+        "tags": ["Instance"],
+        "summary": "Fetch Instances",
+        "security": [{ "apikeyAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/connect/{instance}": {
+      "get": {
+        "tags": ["Instance"],
+        "summary": "Instance Connect",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/restart/{instance}": {
+      "post": {
+        "tags": ["Instance"],
+        "summary": "Restart Instance",
+        "requestBody": { "content": {} },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/setPresence/{instance}": {
+      "post": {
+        "tags": ["Instance"],
+        "summary": "Set Presence",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "presence": "available" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/connectionState/{instance}": {
+      "get": {
+        "tags": ["Instance"],
+        "summary": "Connection Status",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/logout/{instance}": {
+      "delete": {
+        "tags": ["Instance"],
+        "summary": "Logout Instance",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/instance/delete/{instance}": {
+      "delete": {
+        "tags": ["Instance"],
+        "summary": "Delete Instance",
+        "security": [{ "apikeyAuth": [] }],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/proxy/set/{instance}": {
+      "post": {
+        "tags": ["Proxy"],
+        "summary": "Set Proxy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "host": "0.0.0.0",
+                  "port": "8000",
+                  "protocol": "http",
+                  "username": "user",
+                  "password": "pass"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/proxy/find/{instance}": {
+      "get": {
+        "tags": ["Proxy"],
+        "summary": "Find Proxy",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/settings/set/{instance}": {
+      "post": {
+        "tags": ["Settings"],
+        "summary": "Set Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "rejectCall": true,
+                  "msgCall": "I do not accept calls",
+                  "groupsIgnore": false,
+                  "alwaysOnline": true,
+                  "readMessages": false,
+                  "syncFullHistory": false,
+                  "readStatus": false
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/settings/find/{instance}": {
+      "get": {
+        "tags": ["Settings"],
+        "summary": "Find Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendText/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Text",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "text": "teste de envio"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendMedia/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Media",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "mediatype": "image",
+                  "mimetype": "image/png",
+                  "caption": "Teste de caption",
+                  "media": "https://s3.amazonaws.com/atendai/company-3708fcdf-954b-48f8-91ff-25babaccac67/1712605171932.jpeg",
+                  "fileName": "Imagem.png"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendWhatsAppAudio/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Narrated Audio",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "audio": "https://evolution-api.com/files/narratedaudio.mp3"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendStatus/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Status/Stories",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "type": "text",
+                  "content": "Hi, how are you today?",
+                  "caption": "This is my status/storie image",
+                  "backgroundColor": "#008000",
+                  "font": 1,
+                  "allContacts": false,
+                  "statusJidList": ["{{remoteJid}}@s.whatsapp.net"]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendSticker/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Sticker",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "sticker": "https://evolution-api.com/files/sticker.png"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendLocation/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Location",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "name": "Bora Bora",
+                  "address": "French Polynesian",
+                  "latitude": -16.505538233564373,
+                  "longitude": -151.7422770494996
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendContact/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Contact",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "contact": [
+                    {
+                      "fullName": "Contact Name",
+                      "wuid": "559999999999",
+                      "phoneNumber": "+55 99 9 9999-9999",
+                      "organization": "Company Name",
+                      "email": "email",
+                      "url": "url page"
+                    },
+                    {
+                      "fullName": "Contact Name",
+                      "wuid": "559911111111",
+                      "phoneNumber": "+55 99 9 1111-1111",
+                      "organization": "Company Name",
+                      "email": "email",
+                      "url": "url page"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendReaction/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Reaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "key": {
+                    "remoteJid": "{{remoteJid}}@s.whatsapp.net",
+                    "fromMe": true,
+                    "id": "BAE5A75CB0F39712"
+                  },
+                  "reaction": "🚀"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendPoll/{instance}": {
+      "post": {
+        "tags": ["Send Message"],
+        "summary": "Send Poll",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "name": "Main text of the poll",
+                  "selectableCount": 1,
+                  "values": ["Question 1", "Question 2", "Question 3"]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/whatsappNumbers/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Check is WhatsApp Number",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "numbers": [
+                    "55911111111",
+                    "55922222222",
+                    "55933333333",
+                    "55944444444",
+                    "55955555555"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/markMessageAsRead/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Read Messages",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "readMessages": [
+                    {
+                      "remoteJid": "123@s.whatsapp.net",
+                      "fromMe": false,
+                      "id": "80C4CE9B72F797DBC6ECD8D19B247FC9"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/archiveChat/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Archive Chat",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "lastMessage": {
+                    "key": {
+                      "remoteJid": "123@s.whatsapp.net",
+                      "fromMe": false,
+                      "id": "80C4CE9B72F797DBC6ECD8D19B247FC9"
+                    },
+                    "chat": "123@s.whatsapp.net",
+                    "archive": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/markChatUnread/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Mark Chat Unread",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "lastMessage": {
+                    "key": {
+                      "remoteJid": "123@s.whatsapp.net",
+                      "fromMe": false,
+                      "id": "80C4CE9B72F797DBC6ECD8D19B247FC9"
+                    },
+                    "chat": "123@s.whatsapp.net"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/deleteMessageForEveryone/{instance}": {
+      "delete": {
+        "tags": ["Chat"],
+        "summary": "Delete Message",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/fetchProfilePictureUrl/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Fetch Profile Picture",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "number": "{{remoteJid}}" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/getBase64FromMediaMessage/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Get Base64 From Media Message",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "message": { "key": { "id": "3EB0F4A1F841F02958FB74" } },
+                  "convertToMp4": false
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/updateMessage/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Update Message",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "key": {
+                    "remoteJid": "123@s.whatsapp.net",
+                    "fromMe": true,
+                    "id": "3EB04DC69D97835D7CC6F12776D25766FBC224E2"
+                  },
+                  "text": "new message"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/sendPresence/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Send Precense",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "delay": 1200,
+                  "presence": "composing"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/updateBlockStatus/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Update Block Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "status": "block"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/findContacts/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Find Contacts",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "example": { "where": {} } }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/findMessages/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Find Messages",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "where": {
+                    "key": { "remoteJid": "{{remoteJid}}" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/findStatusMessage/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Find Status Message",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "where": {
+                    "_id": "6390fe2eba512dacefa8ce3a",
+                    "remoteJid": "123@s.whatsapp.net",
+                    "id": "BAE5959535174C7E",
+                    "fromMe": true
+                  },
+                  "limit": 10
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/findChats/{instance}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Find Chats",
+        "requestBody": { "content": {} },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/label/findLabels/{instance}": {
+      "get": {
+        "tags": ["Label"],
+        "summary": "Find Labels",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/label/handleLabel/{instance}": {
+      "post": {
+        "tags": ["Label"],
+        "summary": "Handle Labels",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "labelId": "labelId",
+                  "action": "add"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/fetchBusinessProfile/{instance}": {
+      "post": {
+        "tags": ["Profile Settings"],
+        "summary": "Fetch Business Profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "number": "{{remoteJid}}" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/fetchProfile/{instance}": {
+      "post": {
+        "tags": ["Profile Settings"],
+        "summary": "Fetch Profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "number": "{{remoteJid}}" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/updateProfileName/{instance}": {
+      "post": {
+        "tags": ["Profile Settings"],
+        "summary": "Update Profile Name",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "name": "Evolution-API" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/updateProfileStatus/{instance}": {
+      "post": {
+        "tags": ["Profile Settings"],
+        "summary": "Update Profile Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "status": "Unavailable for calls" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/updateProfilePicture/{instance}": {
+      "post": {
+        "tags": ["Profile Settings"],
+        "summary": "Update Profile Picture",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "picture": "https://avatars.githubusercontent.com/u/136080052?s=200&v=4"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/removeProfilePicture/{instance}": {
+      "delete": {
+        "tags": ["Profile Settings"],
+        "summary": "Remove Profile Picture",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/fetchPrivacySettings/{instance}": {
+      "get": {
+        "tags": ["Profile Settings"],
+        "summary": "Fetch Privacy Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/updatePrivacySettings/{instance}": {
+      "post": {
+        "tags": ["Profile Settings"],
+        "summary": "Update Privacy Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "readreceipts": "all",
+                  "profile": "all",
+                  "status": "contacts",
+                  "online": "all",
+                  "last": "contacts",
+                  "groupadd": "none"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/create/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Create Group",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "subject": "Test 02",
+                  "description": "optional",
+                  "participants": ["5531900000000", "5531900000000"]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/updateGroupPicture/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Update Group Picture",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "image": "https://evolution-api.com/files/sticker.png"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/updateGroupSubject/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Update Group Subject",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "subject": "Group Name or Subject" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/updateGroupDescription/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Update Group Description",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "description": "Group Description or Rules" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/inviteCode/{instance}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Fetch Invite Code",
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/revokeInviteCode/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Revoke Invite Code",
+        "requestBody": { "content": {} },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/sendInvite/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Send Invite Url",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "groupJid": "{{groupJid}}",
+                  "description": "Access this link to join my WhatsApp group:",
+                  "numbers": ["{{remoteJid}}"]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/inviteInfo/{instance}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Find Group by Invite Code",
+        "parameters": [
+          {
+            "name": "inviteCode",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{inviteCode}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/findGroupInfos/{instance}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Find Group by Jid",
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/fetchAllGroups/{instance}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Fetch All Groups",
+        "parameters": [
+          {
+            "name": "getParticipants",
+            "in": "query",
+            "schema": { "type": "boolean", "example": "false" }
+          },
+
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/participants/{instance}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Find Participants",
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/updateParticipant/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Update Participant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "action": "add",
+                  "participants": [
+                    "5531900000000",
+                    "5531911111111",
+                    "5531922222222"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/updateSetting/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Update Setting",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "action": "not_announcement" }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/toggleEphemeral/{instance}": {
+      "post": {
+        "tags": ["Group"],
+        "summary": "Toggle Ephemeral",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": { "expiration": 0 }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/group/leaveGroup/{instance}": {
+      "delete": {
+        "tags": ["Group"],
+        "summary": "Leave Group",
+        "parameters": [
+          {
+            "name": "groupJid",
+            "in": "query",
+            "schema": { "type": "string", "example": "{{groupJid}}" }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/websocket/set/{instance}": {
+      "post": {
+        "tags": ["Integrations > Events > Websocket"],
+        "summary": "Set Websocket",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "websocket": {
+                    "enabled": true,
+                    "events": [
+                      "APPLICATION_STARTUP",
+                      "QRCODE_UPDATED",
+                      "MESSAGES_SET",
+                      "MESSAGES_UPSERT",
+                      "MESSAGES_UPDATE",
+                      "MESSAGES_DELETE",
+                      "SEND_MESSAGE",
+                      "CONTACTS_SET",
+                      "CONTACTS_UPSERT",
+                      "CONTACTS_UPDATE",
+                      "PRESENCE_UPDATE",
+                      "CHATS_SET",
+                      "CHATS_UPSERT",
+                      "CHATS_UPDATE",
+                      "CHATS_DELETE",
+                      "GROUPS_UPSERT",
+                      "GROUP_UPDATE",
+                      "GROUP_PARTICIPANTS_UPDATE",
+                      "CONNECTION_UPDATE",
+                      "LABELS_EDIT",
+                      "LABELS_ASSOCIATION",
+                      "CALL",
+                      "TYPEBOT_START",
+                      "TYPEBOT_CHANGE_STATUS"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/websocket/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Events > Websocket"],
+        "summary": "Find Websocket",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/rabbitmq/set/{instance}": {
+      "post": {
+        "tags": ["Integrations > Events > Rabbitmq"],
+        "summary": "Set Rabbitmq",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "rabbitmq": {
+                    "enabled": true,
+                    "events": [
+                      "APPLICATION_STARTUP",
+                      "QRCODE_UPDATED",
+                      "MESSAGES_SET",
+                      "MESSAGES_UPSERT",
+                      "MESSAGES_UPDATE",
+                      "MESSAGES_DELETE",
+                      "SEND_MESSAGE",
+                      "CONTACTS_SET",
+                      "CONTACTS_UPSERT",
+                      "CONTACTS_UPDATE",
+                      "PRESENCE_UPDATE",
+                      "CHATS_SET",
+                      "CHATS_UPSERT",
+                      "CHATS_UPDATE",
+                      "CHATS_DELETE",
+                      "GROUPS_UPSERT",
+                      "GROUP_UPDATE",
+                      "GROUP_PARTICIPANTS_UPDATE",
+                      "CONNECTION_UPDATE",
+                      "LABELS_EDIT",
+                      "LABELS_ASSOCIATION",
+                      "CALL",
+                      "TYPEBOT_START",
+                      "TYPEBOT_CHANGE_STATUS"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/rabbitmq/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Events > Rabbitmq"],
+        "summary": "Find Rabbitmq",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sqs/set/{instance}": {
+      "post": {
+        "tags": ["Integrations > Events > Sqs"],
+        "summary": "Set Sqs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "sqs": {
+                    "enabled": true,
+                    "events": [
+                      "APPLICATION_STARTUP",
+                      "QRCODE_UPDATED",
+                      "MESSAGES_SET",
+
+                      "MESSAGES_UPSERT",
+                      "MESSAGES_UPDATE",
+                      "MESSAGES_DELETE",
+                      "SEND_MESSAGE",
+                      "CONTACTS_SET",
+                      "CONTACTS_UPSERT",
+                      "CONTACTS_UPDATE",
+                      "PRESENCE_UPDATE",
+                      "CHATS_SET",
+                      "CHATS_UPSERT",
+                      "CHATS_UPDATE",
+                      "CHATS_DELETE",
+                      "GROUPS_UPSERT",
+                      "GROUP_UPDATE",
+                      "GROUP_PARTICIPANTS_UPDATE",
+                      "CONNECTION_UPDATE",
+                      "LABELS_EDIT",
+                      "LABELS_ASSOCIATION",
+                      "CALL",
+                      "TYPEBOT_START",
+                      "TYPEBOT_CHANGE_STATUS"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sqs/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Events > Sqs"],
+        "summary": "Find Sqs",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/webhook/set/{instance}": {
+      "post": {
+        "tags": ["Integrations > Events > Webhook"],
+        "summary": "Set Webhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "webhook": {
+                    "enabled": true,
+                    "url": "https://webhook.site",
+                    "byEvents": false,
+                    "base64": false,
+                    "events": [
+                      "APPLICATION_STARTUP",
+                      "QRCODE_UPDATED",
+                      "MESSAGES_SET",
+                      "MESSAGES_UPSERT",
+                      "MESSAGES_UPDATE",
+                      "MESSAGES_DELETE",
+                      "SEND_MESSAGE",
+                      "CONTACTS_SET",
+                      "CONTACTS_UPSERT",
+                      "CONTACTS_UPDATE",
+                      "PRESENCE_UPDATE",
+                      "CHATS_SET",
+                      "CHATS_UPSERT",
+                      "CHATS_UPDATE",
+                      "CHATS_DELETE",
+                      "GROUPS_UPSERT",
+                      "GROUP_UPDATE",
+                      "GROUP_PARTICIPANTS_UPDATE",
+                      "CONNECTION_UPDATE",
+                      "LABELS_EDIT",
+                      "LABELS_ASSOCIATION",
+                      "CALL",
+                      "TYPEBOT_START",
+                      "TYPEBOT_CHANGE_STATUS"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/webhook/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Events > Webhook"],
+        "summary": "Find Webhook",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chatwoot/set/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Chatwoot"],
+        "summary": "Set Chatwoot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "accountId": "1",
+                  "token": "TOKEN",
+                  "url": "https://chatwoot.com",
+                  "signMsg": true,
+                  "reopenConversation": true,
+                  "conversationPending": false,
+                  "nameInbox": "evolution",
+                  "mergeBrazilContacts": true,
+                  "importContacts": true,
+                  "importMessages": true,
+                  "daysLimitImportMessages": 2,
+                  "signDelimiter": "|+",
+                  "autoCreate": true,
+                  "organization": "BOT",
+                  "logo": "link da sua",
+                  "ignoreJids": ["@g.us"]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chatwoot/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Chatwoot"],
+        "summary": "Find Chatwoot",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/changeStatus/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Typebot > Typebot Session"],
+        "summary": "Change Session Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "remoteJid": "5511912345678@s.whatsapp.net",
+                  "status": "closed"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/fetchSessions/{typebotId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Typebot > Typebot Session"],
+        "summary": "Fetch Sessions",
+        "parameters": [
+          {
+            "name": "typebotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/settings/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Typebot > Default Settings"],
+        "summary": "Set Default Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 10,
+                  "ignoreJids": [],
+                  "typebotIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/fetchSettings/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Typebot > Default Settings"],
+        "summary": "Fetch Default Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/create/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Typebot"],
+        "summary": "Create Typebot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "url": "https://bot.dgcode.com.br",
+                  "typebot": "my-typebot-uoz1rg9",
+                  "triggerType": "keyword",
+                  "triggerOperator": "regex",
+                  "triggerValue": "^atend.*",
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 10
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Typebot"],
+        "summary": "Find Typebots",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/fetch/{typebotId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Typebot"],
+        "summary": "Fetch Typebot",
+        "parameters": [
+          {
+            "name": "typebotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true,
+            "example": "clx6niurm0001lzrhhqqe72yq"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/update/{typebotId}/{instance}": {
+      "put": {
+        "tags": ["Integrations > Chatbot > Typebot"],
+        "summary": "Update Typebot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "url": "https://bot.dgcode.com.br",
+                  "typebot": "my-typebot-uoz1rg9",
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 10,
+                  "triggerType": "keyword",
+                  "triggerOperator": "contains",
+                  "triggerValue": "evolution"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "typebotId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "required": true,
+              "example": "clx6niurm0001lzrhhqqe72yq"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/delete/{typebotId}/{instance}": {
+      "delete": {
+        "tags": ["Integrations > Chatbot > Typebot"],
+        "summary": "Delete Typebot",
+        "parameters": [
+          {
+            "name": "typebotId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "required": true,
+              "example": "clx6niurm0001lzrhhqqe72yq"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/typebot/start/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Typebot"],
+        "summary": "Start Typebot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "url": "https://bot.dgcode.com.br",
+                  "typebot": "fluxo-unico-3uuso28",
+                  "remoteJid": "557499879409@s.whatsapp.net",
+                  "startSession": false,
+                  "variables": [
+                    { "name": "pushName", "value": "Davidson Gomes" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/changeStatus/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Evolution Bot > Session"],
+        "summary": "Change Session Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "remoteJid": "5511912345678@s.whatsapp.net",
+                  "status": "closed"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/fetchSessions/{evolutionBotId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Evolution Bot > Session"],
+        "summary": "Fetch Sessions",
+        "parameters": [
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/settings/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Evolution Bot > Default Settings"],
+        "summary": "Set Default Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": [],
+                  "botIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/fetchSettings/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Evolution Bot > Default Settings"],
+        "summary": "Fetch Default Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/create/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Evolution Bot"],
+        "summary": "Create Bots",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "apiUrl": "http://api.site.com/v1",
+                  "apiKey": "app-123456",
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 0,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Evolution Bot"],
+        "summary": "Find Bots",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/fetch/{evolutionBotId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Evolution Bot"],
+        "summary": "Fetch Bot",
+        "parameters": [
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/update/{evolutionBotId}/{instance}": {
+      "put": {
+        "tags": ["Integrations > Chatbot > Evolution Bot"],
+        "summary": "Update Bot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "apiUrl": "http://api.site.com/v1",
+                  "apiKey": "app-123456",
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 0,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/delete/{evolutionBotId}/{instance}": {
+      "delete": {
+        "tags": ["Integrations > Chatbot > Evolution Bot"],
+        "summary": "Delete Bot",
+        "parameters": [
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/changeStatus/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Openai > Openai Session"],
+        "summary": "Change Session Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "remoteJid": "5511912345678@s.whatsapp.net",
+                  "status": "closed"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/fetchSessions/{openaiBotId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Openai > Openai Session"],
+        "summary": "Fetch Sessions",
+        "parameters": [
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/settings/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Openai > Default Settings"],
+        "summary": "Set Default Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "openaiCredsId": "clyja4oys0a3uqpy7k3bd7swe",
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": [],
+                  "openaiIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/fetchSettings/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Openai > Default Settings"],
+        "summary": "Fetch Default Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/creds/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Openai > Openai Creds"],
+        "summary": "Set Openai Creds",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "apikey",
+                  "apiKey": "sk-proj-..."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Integrations > Chatbot > Openai > Openai Creds"],
+        "summary": "Get Openai Creds",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/creds/{openaiCredsId}/{instance}": {
+      "delete": {
+        "tags": ["Integrations > Chatbot > Openai > Openai Creds"],
+        "summary": "Delete Openai Creds",
+        "parameters": [
+          {
+            "name": "openaiCredsId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/create/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Openai"],
+        "summary": "Create Openai Bots",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "openaiCredsId": "clyrx36wj0001119ucjjzxik1",
+                  "botType": "assistant",
+                  "assistantId": "asst_LRNyh6qC4qq8NTyPjHbcJjSp",
+                  "functionUrl": "https://n8n.site.com",
+                  "model": "gpt-4o",
+                  "systemMessages": ["You are a helpful assistant."],
+                  "assistantMessages": [
+                    "Hello there, how may I assist you today?"
+                  ],
+                  "userMessages": ["Hello!"],
+                  "maxTokens": 300,
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 10,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Openai"],
+        "summary": "Find Openai Bots",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/fetch/{openaiBotId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Openai"],
+        "summary": "Fetch Openai Bot",
+        "parameters": [
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/update/{openaiBotId}/{instance}": {
+      "put": {
+        "tags": ["Integrations > Chatbot > Openai"],
+        "summary": "Update Openai Bot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "openaiCredsId": "clyrx36wj0001119ucjjzxik1",
+                  "botType": "assistant",
+                  "assistantId": "asst_LRNyh6qC4qq8NTyPjHbcJjSp",
+                  "functionUrl": "https://webhook.com",
+                  "model": "gpt-4o",
+                  "systemMessages": ["You are a helpful assistant."],
+                  "assistantMessages": [
+                    "Hello there, how may I assist you today?"
+                  ],
+                  "userMessages": ["Hello!"],
+                  "maxTokens": 300,
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 10,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/openai/delete/{openaiBotId}/{instance}": {
+      "delete": {
+        "tags": ["Integrations > Chatbot > Openai"],
+        "summary": "Delete Openai Bot",
+        "parameters": [
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/changeStatus/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Dify > Dify Session"],
+        "summary": "Change Session Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "remoteJid": "5511912345678@s.whatsapp.net",
+                  "status": "closed"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/fetchSessions/{difyId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Dify > Dify Session"],
+        "summary": "Fetch Sessions",
+        "parameters": [
+          {
+            "name": "difyId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/settings/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Dify > Default Settings"],
+        "summary": "Set Default Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": [],
+                  "difyIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/fetchSettings/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Dify > Default Settings"],
+        "summary": "Fetch Default Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/create/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Dify"],
+        "summary": "Create Dify Bots",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "botType": "chatBot",
+                  "apiUrl": "http://dify.site.com/v1",
+                  "apiKey": "app-123456",
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 0,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Dify"],
+        "summary": "Find Dify Bots",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/fetch/{difyId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Dify"],
+        "summary": "Fetch Dify Bot",
+        "parameters": [
+          {
+            "name": "difyId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/update/{difyId}/{instance}": {
+      "put": {
+        "tags": ["Integrations > Chatbot > Dify"],
+        "summary": "Update Dify Bot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "botType": "chatBot",
+                  "apiUrl": "http://dify.site.com/v1",
+                  "apiKey": "app-123456",
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 0,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "difyId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dify/delete/{difyId}/{instance}": {
+      "delete": {
+        "tags": ["Integrations > Chatbot > Dify"],
+        "summary": "Delete Dify Bot",
+        "parameters": [
+          {
+            "name": "difyId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/changeStatus/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Flowise > Flowise Session"],
+        "summary": "Change Session Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "remoteJid": "5511912345678@s.whatsapp.net",
+                  "status": "closed"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/fetchSessions/{difyId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Flowise > Flowise Session"],
+        "summary": "Fetch Sessions",
+        "parameters": [
+          {
+            "name": "difyId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/settings/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Flowise > Default Settings"],
+        "summary": "Set Default Settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "expire": 20,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": [],
+                  "flowiseIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/fetchSettings/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Flowise > Default Settings"],
+        "summary": "Fetch Default Settings",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/create/{instance}": {
+      "post": {
+        "tags": ["Integrations > Chatbot > Flowise"],
+        "summary": "Create Flowise Bots",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "apiUrl": "http://flowise.site.com/v1",
+                  "apiKey": "app-123456",
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 0,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Flowise"],
+        "summary": "Find Flowise Bots",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/fetch/{flowiseId}/{instance}": {
+      "get": {
+        "tags": ["Integrations > Chatbot > Flowise"],
+        "summary": "Fetch Flowise Bot",
+        "parameters": [
+          {
+            "name": "flowiseId",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/update/{flowiseId}/{instance}": {
+      "put": {
+        "tags": ["Integrations > Chatbot > Flowise"],
+        "summary": "Update Flowise Bot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "enabled": true,
+                  "botType": "chatBot",
+                  "apiUrl": "http://dify.site.com/v1",
+                  "apiKey": "app-123456",
+                  "triggerType": "keyword",
+                  "triggerOperator": "equals",
+                  "triggerValue": "teste",
+                  "expire": 0,
+                  "keywordFinish": "#SAIR",
+                  "delayMessage": 1000,
+                  "unknownMessage": "Mensagem não reconhecida",
+                  "listeningFromMe": false,
+                  "stopBotFromMe": false,
+                  "keepOpen": false,
+                  "debounceTime": 0,
+                  "ignoreJids": []
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "flowiseId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/flowise/delete/{flowiseId}/{instance}": {
+      "delete": {
+        "tags": ["Integrations > Chatbot > Flowise"],
+        "summary": "Delete Flowise Bot",
+        "parameters": [
+          {
+            "name": "flowiseId",
+            "in": "path",
+            "schema": { "type": "string", "required": true }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendTemplate/{instance}": {
+      "post": {
+        "tags": ["Integrations > Channel > Cloud API Oficial > Send Message"],
+        "summary": "Send Template",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "name": "hello_world",
+                  "language": "en_US",
+                  "components": [
+                    {
+                      "type": "body",
+                      "parameters": [
+                        { "type": "text", "text": "Name" },
+                        { "type": "text", "text": "email@email.com" }
+                      ]
+                    },
+                    {
+                      "type": "button",
+                      "sub_type": "URL",
+                      "index": "1",
+                      "parameters": [
+                        { "type": "text", "text": "/reset-password/1234" }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendButtons/{instance}": {
+      "post": {
+        "tags": ["Integrations > Channel > Cloud API Oficial > Send Message"],
+        "summary": "Send Button",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "title": "Title Button",
+                  "description": "Description Button",
+                  "footerText": "Footer Button",
+                  "buttons": [
+                    { "text": "Resposta 1", "id": "1" },
+                    { "text": "Resposta 2", "id": "2" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/message/sendList/{instance}": {
+      "post": {
+        "tags": ["Integrations > Channel > Cloud API Oficial > Send Message"],
+        "summary": "Send List",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "number": "{{remoteJid}}",
+                  "title": "List Title",
+                  "description": "List description",
+                  "buttonText": "Click Here",
+                  "footerText": "footer list\nhttps://examplelink.com.br",
+                  "sections": [
+                    {
+                      "title": "Row tilte 01",
+                      "rows": [
+                        {
+                          "title": "Title row 01",
+                          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                          "rowId": "rowId 001"
+                        },
+                        {
+                          "title": "Title row 02",
+                          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                          "rowId": "rowId 002"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Row tilte 02",
+                      "rows": [
+                        {
+                          "title": "Title row 01",
+                          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                          "rowId": "rowId 001"
+                        },
+                        {
+                          "title": "Title row 02",
+                          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                          "rowId": "rowId 002"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/template/create/{instance}": {
+      "post": {
+        "tags": ["Integrations > Channel > Cloud API Oficial > Template"],
+        "summary": "Create Template",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "teste_evolution",
+                  "category": "MARKETING",
+                  "allowCategoryChange": false,
+                  "language": "en_US",
+                  "components": [
+                    {
+                      "type": "BODY",
+                      "text": "Thank you for your order, {{1}}! Your confirmation number is {{2}}. If you have any questions, please use the buttons below to contact support. Thank you for being a customer!",
+                      "example": {
+                        "body_text": [["Pablo", "860198-230332"]]
+                      }
+                    },
+                    {
+                      "type": "BUTTONS",
+                      "buttons": [
+                        {
+                          "type": "QUICK_REPLY",
+                          "text": "Unsubscribe from Promos"
+                        },
+                        {
+                          "type": "URL",
+                          "text": "Contact Support",
+                          "url": "https://atendai.com"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/template/find/{instance}": {
+      "get": {
+        "tags": ["Integrations > Channel > Cloud API Oficial > Template"],
+        "summary": "Find Templates",
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/s3/getMedia/{instance}": {
+      "post": {
+        "tags": ["Integrations > Storage > S3"],
+        "summary": "Get Media",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "example": {} }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/s3/getMediaUrl/{instance}": {
+      "post": {
+        "tags": ["Integrations > Storage > S3"],
+        "summary": "Get Media Url",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "id": "clykhoqq70003pmm88bb6eejd"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "apikey",
+        "description": "Your authorization key header"
+      }
+    }
+  }
+}
