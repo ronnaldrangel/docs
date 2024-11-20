@@ -20,7 +20,12 @@
     {
       "group": "WhatsApp API",
       "pages": [
-        "introduction",
+        "introduction"
+      ]
+    },
+    {
+      "group": "Manejo de API",
+      "pages": [
         "send-message"
       ]
     }
