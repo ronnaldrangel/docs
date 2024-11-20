@@ -15,8 +15,7 @@
       "to": "#07C983"
     }
   },
-  "tabs": [
-  ],
+  "tabs": [],
   "navigation": [
     {
       "group": "WhatsApp API",
@@ -24,20 +23,6 @@
         "introduction",
         "quickstart",
         "development"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
       ]
     }
   ],
