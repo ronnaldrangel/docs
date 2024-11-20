@@ -24,9 +24,9 @@
       ]
     },
     {
-      "group": "Manejo de API",
+      "group": "Enviar Mensaje",
       "pages": [
-        "send-message"
+        "send-text"
       ]
     }
   ],
